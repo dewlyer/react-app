@@ -32,7 +32,6 @@ const data = [
   },
 ];
 
-
 export default class extends React.Component {
   constructor(props) {
     super(props);
@@ -41,14 +40,12 @@ export default class extends React.Component {
   state = {
     searchText: '',
     searchedColumn: '',
-
     date: null,
     style: {
       background: '#0092ff',
       padding: '8px 0'
     }
   };
-
 
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
@@ -119,7 +116,6 @@ export default class extends React.Component {
     this.setState({date});
   };
 
-
   render() {
     const {Header, Footer, Sider, Content} = Layout;
     const {style, date} = this.state;
@@ -134,9 +130,7 @@ export default class extends React.Component {
               subTitle="This is a subtitle"
             />
           </Header>
-
           <Content>
-
             <Table dataSource={data}>
               <ColumnGroup title="Name">
                 <Column title="First Name" dataIndex="firstName" key="firstName"/>
@@ -169,7 +163,6 @@ export default class extends React.Component {
                 )}
               />
             </Table>
-
             <Divider orientation="left" style={{color: '#333', fontWeight: 'normal'}}>
               Responsive
             </Divider>
@@ -187,11 +180,8 @@ export default class extends React.Component {
                 <div style={style}>col-6</div>
               </Col>
             </Row>
-
           </Content>
-
           <Footer>
-
             <Button type="primary">Button</Button>
             <ConfigProvider locale={zhCN}>
               <div style={{width: 400, margin: '100px auto'}}>
@@ -201,11 +191,8 @@ export default class extends React.Component {
                 </div>
               </div>
             </ConfigProvider>
-
           </Footer>
         </Layout>
-
-
       </>
     )
   };
