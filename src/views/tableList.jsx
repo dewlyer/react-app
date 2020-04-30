@@ -100,37 +100,38 @@ const columnsC = [
   {
     title: '学校名称',
     dataIndex: 'schoolName',
-    key: 'schoolName',
-    width: 150,
+    key: 'schoolName'
   },
   {
     title: '待识别数',
     dataIndex: 'taskTotal',
     key: 'taskTotal',
-    width: 150,
+    width: '10%'
   },
   {
     title: '开始识别时间',
     dataIndex: 'startTime',
     key: 'startTime',
-    width: 150,
+    width: '18%'
   },
   {
     title: '结束识别时间',
     dataIndex: 'endTime',
     key: 'endTime',
-    width: 150,
+    width: '18%'
   },
   {
     title: '平均识别速度',
     dataIndex: 'recognitionTimes',
     key: 'recognitionTimes',
-    width: 150,
+    render: text => <span>每秒{text}张</span>,
+    width: '15%'
   },
   {
     title: '识别总耗时',
-    dataIndex: 'priority',
-    key: 'priority',
+    dataIndex: 'lastRecognitionTime',
+    key: 'lastRecognitionTime',
+    width: '15%'
   },
 ];
 
