@@ -1,142 +1,13 @@
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import {SearchOutlined} from '@ant-design/icons';
-import {Button, Input, Table} from 'antd';
-import {
-  getMonitorRecognition,
-  getMonitorFinished,
-  getMonitorHistory
-} from '../api/cloudRecognition';
-
-// projectId: "430100-713f84f9eb4b474fb9c79b333359709a"
-// subjectCode: "204007"
-// projectName: "蔡江华测试"
-// subjectName: "语文政治"
-// schoolId: "fcb9e05e-e4b5-4065-8084-f253af5c2905"
-// schoolName: "中南迅智一中测试"
-// priority: null
-// taskTotal: 9
-// startTime: "2020-04-30 14:08:08"
-// lastRecognitionTime: "2020-04-30 14:08:15"
-// endTime: "2020-04-30 14:08:15"
-// statusWhenFinish: "识别完成"
-// statusWhenStart: "重新识别"
-// recognitionTimes: 1
-const columnsA = [
-  {
-    title: '学校名称',
-    dataIndex: 'schoolName',
-    key: 'schoolName',
-    width: 150,
-  },
-  {
-    title: '待识别数',
-    dataIndex: 'taskTotal',
-    key: 'taskTotal',
-    width: 150,
-  },
-  {
-    title: '开始识别时间',
-    dataIndex: 'startTime',
-    key: 'startTime',
-    width: 150,
-  },
-  {
-    title: '结束识别时间',
-    dataIndex: 'endTime',
-    key: 'endTime',
-    width: 150,
-  },
-  {
-    title: '平均识别速度',
-    dataIndex: 'recognitionTimes',
-    key: 'recognitionTimes',
-    width: 150,
-  },
-  {
-    title: '识别总耗时',
-    dataIndex: 'priority',
-    key: 'priority',
-  },
-];
-const columnsB = [
-  {
-    title: '学校名称',
-    dataIndex: 'schoolName',
-    key: 'schoolName',
-    width: 150,
-  },
-  {
-    title: '待识别数',
-    dataIndex: 'taskTotal',
-    key: 'taskTotal',
-    width: 150,
-  },
-  {
-    title: '开始识别时间',
-    dataIndex: 'startTime',
-    key: 'startTime',
-    width: 150,
-  },
-  {
-    title: '结束识别时间',
-    dataIndex: 'endTime',
-    key: 'endTime',
-    width: 150,
-  },
-  {
-    title: '平均识别速度',
-    dataIndex: 'recognitionTimes',
-    key: 'recognitionTimes',
-    width: 150,
-  },
-  {
-    title: '识别总耗时',
-    dataIndex: 'priority',
-    key: 'priority',
-  },
-];
-const columnsC = [
-  {
-    title: '学校名称',
-    dataIndex: 'schoolName',
-    key: 'schoolName'
-  },
-  {
-    title: '待识别数',
-    dataIndex: 'taskTotal',
-    key: 'taskTotal',
-    width: '10%'
-  },
-  {
-    title: '开始识别时间',
-    dataIndex: 'startTime',
-    key: 'startTime',
-    width: '18%'
-  },
-  {
-    title: '结束识别时间',
-    dataIndex: 'endTime',
-    key: 'endTime',
-    width: '18%'
-  },
-  {
-    title: '平均识别速度',
-    dataIndex: 'recognitionTimes',
-    key: 'recognitionTimes',
-    render: text => <span>每秒{text}张</span>,
-    width: '15%'
-  },
-  {
-    title: '识别总耗时',
-    dataIndex: 'lastRecognitionTime',
-    key: 'lastRecognitionTime',
-    width: '15%'
-  },
-];
+import {Table, Button, Input} from 'antd';
+import {getMonitorRecognition, getMonitorFinished, getMonitorHistory} from '../api/cloudRecognition';
+import {columnsA, columnsB, columnsC} from './tableColumns';
 
 export default class TableList extends React.Component {
   state = {
+    loading: false,
     list: [],
     columnsList: [columnsA, columnsB, columnsC]
   };
@@ -148,10 +19,12 @@ export default class TableList extends React.Component {
       searchedColumn: dataIndex,
     });
   };
+
   handleReset = clearFilters => {
     clearFilters();
     this.setState({searchText: ''});
   };
+
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
       <div style={{padding: 8}}>
@@ -216,12 +89,14 @@ export default class TableList extends React.Component {
 
   queryTableList = async () => {
     try {
+      this.setState({loading: true});
       const {data} = await this.getTableListData();
       const list = data && data['recognitionList'];
-      console.log(list);
       this.setState({list});
     } catch (e) {
       throw e;
+    } finally {
+      this.setState({loading: false});
     }
   };
 
@@ -231,8 +106,8 @@ export default class TableList extends React.Component {
 
   render() {
     const {type} = this.props;
-    const {list, columnsList} = this.state;
+    const {list, columnsList, loading} = this.state;
     const columns = columnsList[type];
-    return <Table dataSource={list} columns={columns} rowKey={(r, i) => i.toString()}/>;
+    return <Table dataSource={list} columns={columns} loading={loading} rowKey={(r, i) => i.toString()}/>;
   }
 }
