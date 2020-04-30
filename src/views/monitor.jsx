@@ -1,6 +1,10 @@
 import React from 'react';
 import './monitor.css';
-import {AppleOutlined, AndroidOutlined} from '@ant-design/icons';
+import {
+  TeamOutlined,
+  SnippetsOutlined,
+  CarryOutOutlined
+} from '@ant-design/icons';
 import {Layout, PageHeader, Tabs} from 'antd';
 import ListDone from './list-done';
 
@@ -29,13 +33,13 @@ export default class extends React.Component {
           </Header>
           <Content style={contentStyle}>
             <Tabs defaultActiveKey="2">
-              <TabPane key="1" tab={<span><AppleOutlined/> 识别中：4</span>}>
+              <TabPane key="1" tab={<span><SnippetsOutlined/> 识别中：4</span>}>
                 <ListDone/>
               </TabPane>
-              <TabPane key="2" tab={<span><AndroidOutlined/> 排队中：3</span>}>
+              <TabPane key="2" tab={<span><TeamOutlined/> 排队中：3</span>}>
                 <ListDone/>
               </TabPane>
-              <TabPane key="3" tab={<span><AndroidOutlined/> 已完成:4</span>}>
+              <TabPane key="3" tab={<span><CarryOutOutlined/> 已完成:4</span>}>
                 <ListDone/>
               </TabPane>
             </Tabs>
