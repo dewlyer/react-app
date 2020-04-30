@@ -203,14 +203,14 @@ export default class TableList extends React.Component {
       ),
   });
 
-  getTableListData = () => {
+  getTableListData = async () => {
     switch (this.state.type) {
       case 2:
-        return getMonitorHistory;
+        return await getMonitorHistory();
       case 1:
-        return getMonitorFinished;
+        return await getMonitorFinished();
       default:
-        return getMonitorRecognition;
+        return await getMonitorRecognition();
     }
   };
 
@@ -221,7 +221,7 @@ export default class TableList extends React.Component {
       console.log(list);
       this.setState({list});
     } catch (e) {
-      throw e
+      throw e;
     }
   };
 
@@ -232,6 +232,6 @@ export default class TableList extends React.Component {
   render() {
     const {list, type} = this.state;
     const columns = this.state.columnsList[type];
-    return <Table dataSource={list} columns={columns} rowKey={(r, i) => i.toString()}/>
+    return <Table dataSource={list} columns={columns} rowKey={(r, i) => i.toString()}/>;
   }
 }
