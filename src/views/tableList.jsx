@@ -136,7 +136,6 @@ const columnsC = [
 
 export default class TableList extends React.Component {
   state = {
-    type: 0,
     list: [],
     columnsList: [columnsA, columnsB, columnsC]
   };
@@ -204,11 +203,11 @@ export default class TableList extends React.Component {
   });
 
   getTableListData = async () => {
-    switch (this.state.type) {
+    switch (this.props.type) {
       case 2:
-        return await getMonitorHistory();
-      case 1:
         return await getMonitorFinished();
+      case 1:
+        return await getMonitorHistory();
       default:
         return await getMonitorRecognition();
     }
@@ -230,8 +229,9 @@ export default class TableList extends React.Component {
   }
 
   render() {
-    const {list, type} = this.state;
-    const columns = this.state.columnsList[type];
+    const {type} = this.props;
+    const {list, columnsList} = this.state;
+    const columns = columnsList[type];
     return <Table dataSource={list} columns={columns} rowKey={(r, i) => i.toString()}/>;
   }
 }
