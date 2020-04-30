@@ -1,9 +1,8 @@
 import React from 'react';
-import {Button, Input, Table, Tag} from 'antd';
 import Highlighter from 'react-highlight-words';
 import {SearchOutlined} from '@ant-design/icons';
-
-const {Column} = Table;
+import {Button, Input, Table, Tag} from 'antd';
+import {getMonitorFinished} from '../api/cloudRecognition';
 
 const data = [
   {
@@ -21,20 +20,14 @@ const data = [
     age: 42,
     address: 'London No. 1 Lake Park',
     tags: ['loser'],
-  },
-  {
-    key: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
+  }
 ];
 
+getMonitorFinished().then(data => {
+  console.log(data);
+});
+
 export default class extends React.Component {
-
-
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     this.setState({
@@ -42,12 +35,10 @@ export default class extends React.Component {
       searchedColumn: dataIndex,
     });
   };
-
   handleReset = clearFilters => {
     clearFilters();
     this.setState({searchText: ''});
   };
-
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
       <div style={{padding: 8}}>
@@ -99,8 +90,11 @@ export default class extends React.Component {
       ),
   });
 
+  // 学校名称 待识别数 开始识别时间 结束识别时间 平均识别速度 识别总耗时
+  // 长沙市第一中学 800/900 2020-4-26 10:35:27 2020-4-26 11:35:27 每秒10张 1分10秒
 
   render() {
+    const {Column} = Table;
     return (
       <Table dataSource={data}>
         <Column title="First Name" dataIndex="firstName" key="firstName" width="150"/>
