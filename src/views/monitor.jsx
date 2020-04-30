@@ -6,7 +6,7 @@ import {
   CarryOutOutlined
 } from '@ant-design/icons';
 import {Layout, PageHeader, Tabs} from 'antd';
-import ListDone from './list-done';
+import TableList from './tableList';
 
 export default class extends React.Component {
   state = {
@@ -32,15 +32,15 @@ export default class extends React.Component {
                         subTitle="A佳教育校园版云端识别监控系统"/>
           </Header>
           <Content style={contentStyle}>
-            <Tabs defaultActiveKey="2">
-              <TabPane key="1" tab={<span><SnippetsOutlined/> 识别中：4</span>}>
-                <ListDone/>
+            <Tabs defaultActiveKey="0">
+              <TabPane key="0" tab={<span><SnippetsOutlined/> 识别中：4</span>}>
+                <TableList type={0}/>
               </TabPane>
-              <TabPane key="2" tab={<span><TeamOutlined/> 排队中：3</span>}>
-                <ListDone/>
+              <TabPane key="1" tab={<span><TeamOutlined/> 排队中：3</span>}>
+                <TableList type={1}/>
               </TabPane>
-              <TabPane key="3" tab={<span><CarryOutOutlined/> 已完成:4</span>}>
-                <ListDone/>
+              <TabPane key="2" tab={<span><CarryOutOutlined/> 已完成:4</span>}>
+                <TableList type={2}/>
               </TabPane>
             </Tabs>
           </Content>
