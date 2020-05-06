@@ -5,7 +5,7 @@ import {
   SnippetsOutlined,
   CarryOutOutlined
 } from '@ant-design/icons';
-import {Layout, Tabs} from 'antd';
+import {Layout, Badge, Tabs, BackTop} from 'antd';
 import TableList from './tableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
@@ -42,17 +42,23 @@ export default class Monitor extends React.Component {
     } = info;
     return (
       <Content style={contentStyle}>
+        <div className="monitor-info">
+          <span>系统识别总速度：</span>
+          <Badge count={speed} style={{backgroundColor: '#1990fe'}} showZero/>
+          <span> 张每分钟</span>
+        </div>
         <Tabs defaultActiveKey="0">
           <TabPane key="0" tab={<span><SnippetsOutlined/> 识别中：{process}</span>}>
             <TableList type={0}/>
           </TabPane>
-          <TabPane key="1" tab={<span><TeamOutlined/> 排队中：{speed}</span>}>
-            <TableList type={1}/>
-          </TabPane>
+          {/*<TabPane key="1" tab={<span><TeamOutlined/> 排队中：{speed}</span>}>*/}
+          {/*  <TableList type={1}/>*/}
+          {/*</TabPane>*/}
           <TabPane key="2" tab={<span><CarryOutOutlined/> 已完成：{finish}</span>}>
             <TableList type={2}/>
           </TabPane>
         </Tabs>
+        <BackTop/>
       </Content>
     );
   };

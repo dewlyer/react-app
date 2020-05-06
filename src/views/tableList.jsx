@@ -2,14 +2,19 @@ import React from 'react';
 import Highlighter from 'react-highlight-words';
 import {SearchOutlined} from '@ant-design/icons';
 import {Table, Button, Input} from 'antd';
-import {getMonitorRecognition, getMonitorFinished, getMonitorHistory} from '../api/cloudRecognition';
 import {columnsA, columnsB, columnsC} from './tableColumns.jsx';
+import {getMonitorRecognition, getMonitorFinished, getMonitorHistory} from '../api/cloudRecognition';
 
 export default class TableList extends React.Component {
+
   state = {
     loading: false,
     list: [],
-    columnsList: [columnsA, columnsB, columnsC]
+    columnsList: [
+      columnsA,
+      columnsB,
+      columnsC
+    ]
   };
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
