@@ -115,4 +115,5 @@ export default class TableList extends React.Component {
     const columns = columnsList[type];
     return <Table dataSource={list} columns={columns} loading={loading} rowKey={(r, i) => i.toString()}/>;
   }
+
 }

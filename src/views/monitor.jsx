@@ -1,7 +1,7 @@
 import React from 'react';
 import './monitor.css';
 import {
-  TeamOutlined,
+  // TeamOutlined,
   SnippetsOutlined,
   CarryOutOutlined
 } from '@ant-design/icons';
@@ -10,6 +10,7 @@ import TableList from './tableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
 export default class Monitor extends React.Component {
+
   state = {
     contentStyle: {
       margin: '0 50px',
@@ -62,4 +63,5 @@ export default class Monitor extends React.Component {
       </Content>
     );
   };
+
 }

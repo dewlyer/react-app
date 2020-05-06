@@ -37,6 +37,7 @@ const columnsA = [
     key: 'priority',
   },
 ];
+
 const columnsB = [
   {
     title: '学校名称',
@@ -74,6 +75,7 @@ const columnsB = [
     key: 'priority',
   },
 ];
+
 const columnsC = [
   {
     title: '学校名称',
