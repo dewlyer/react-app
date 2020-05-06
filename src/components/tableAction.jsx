@@ -9,9 +9,9 @@ function handlerPriorityUpdate(projectId, subjectCode) {
 const Action = (props) => {
   const {text, record} = props;
   return (
-    <Popconfirm title="Are you sure delete this task?" okText="Yes" cancelText="No"
+    <Popconfirm title="你确认要设置优先级？" okText="确认" cancelText="取消"
                 onConfirm={() => console.log('onConfirm')} onCancel={() => console.log('onCancel')}>
-      <Button type="primary" onClick={() => {
+      <Button type="primary" size="small" shape="round" danger onClick={() => {
         console.log(text);
         console.log(record);
         const {projectId, subjectCode} = record;
