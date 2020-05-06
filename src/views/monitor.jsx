@@ -52,9 +52,9 @@ export default class Monitor extends React.Component {
           <TabPane key="0" tab={<span><SnippetsOutlined/> 识别中：{process}</span>}>
             <TableList type={0}/>
           </TabPane>
-          {/*<TabPane key="1" tab={<span><TeamOutlined/> 排队中：{speed}</span>}>*/}
-          {/*  <TableList type={1}/>*/}
-          {/*</TabPane>*/}
+          {/*<TabPane key="1" tab={<span><TeamOutlined/> 排队中：{speed}</span>}>
+            <TableList type={1}/>
+          </TabPane>*/}
           <TabPane key="2" tab={<span><CarryOutOutlined/> 已完成：{finish}</span>}>
             <TableList type={2}/>
           </TabPane>
@@ -62,6 +62,6 @@ export default class Monitor extends React.Component {
         <BackTop/>
       </Content>
     );
-  };
+  }
 
 }
