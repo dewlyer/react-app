@@ -3,7 +3,7 @@ import './App.css';
 import {Layout} from 'antd';
 import Header from './views/header';
 import Footer from './views/footer';
-import Monitor from './views/monitor'
+import Monitor from './views/monitor';
 
 class App extends React.Component {
   render() {
