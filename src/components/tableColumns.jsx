@@ -12,13 +12,13 @@ const columnsA = [
     title: '待识别数',
     dataIndex: 'taskTotal',
     key: 'taskTotal',
-    width: '10%'
+    width: '15%'
   },
   {
     title: '开始识别时间',
     dataIndex: 'humanStartTime',
     key: 'humanStartTime',
-    width: '18%'
+    width: '20%'
   },
   {
     title: '已耗时间',
@@ -30,11 +30,12 @@ const columnsA = [
     title: '识别进度',
     dataIndex: 'humanEndTime',
     key: 'humanEndTime',
-    width: '18%'
+    width: '15%'
   },
   {
     title: '设置优先级',
     key: 'Action',
+    width: '15%',
     render: (text, record) => <Action text={text} record={record}/>
   }
 ];
@@ -88,19 +89,19 @@ const columnsC = [
     title: '待识别数',
     dataIndex: 'taskTotal',
     key: 'taskTotal',
-    width: '10%'
+    width: '15%'
   },
   {
     title: '开始识别时间',
     dataIndex: 'humanStartTime',
     key: 'humanStartTime',
-    width: '18%'
+    width: '20%'
   },
   {
     title: '结束识别时间',
     dataIndex: 'humanEndTime',
     key: 'humanEndTime',
-    width: '18%'
+    width: '20%'
   },
   {
     title: '识别总耗时',
