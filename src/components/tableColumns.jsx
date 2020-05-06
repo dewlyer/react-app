@@ -1,6 +1,10 @@
 import React from 'react';
 import Action from './tableAction';
 
+function reload() {
+  console.log('reload')
+}
+
 const columnsA = [
   {
     title: '学校名称',
@@ -36,7 +40,7 @@ const columnsA = [
     title: '设置优先级',
     key: 'Action',
     width: '15%',
-    render: (text, record) => <Action text={text} record={record}/>
+    render: (text, record, index) => <Action text={text} record={record} index={index} reload={reload}/>
   }
 ];
 
