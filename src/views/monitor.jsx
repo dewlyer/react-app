@@ -6,7 +6,7 @@ import {
   CarryOutOutlined
 } from '@ant-design/icons';
 import {Layout, Badge, Tabs, BackTop} from 'antd';
-import TableList from './tableList';
+import TableList from '../components/tableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
 export default class Monitor extends React.Component {

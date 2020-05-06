@@ -1,5 +1,12 @@
 import React from 'react';
-import {Button} from 'antd';
+import {Popconfirm, Button} from 'antd';
+import {updateMonitorPriority} from '../api/cloudRecognition';
+
+function handlerPriorityUpdate() {
+  updateMonitorPriority({
+
+  }).then().catch();
+}
 
 const columnsA = [
   {
@@ -36,9 +43,17 @@ const columnsA = [
     title: '设置优先级',
     key: 'Action',
     render: (text, record) => (
-      <Button type="primary" onClick={() => {
-        window.alert(1)
-      }}>设置</Button>
+      <Popconfirm title="Are you sure delete this task?"
+                  onConfirm={() => console.log('onConfirm')}
+                  onCancel={() => console.log('onCancel')}
+                  okText="Yes"
+                  cancelText="No">
+        <Button type="primary" onClick={() => {
+          console.log(text);
+          console.log(record);
+          handlerPriorityUpdate();
+        }}>设置</Button>
+      </Popconfirm>
     )
   }
 ];
@@ -115,7 +130,9 @@ const columnsC = [
 ];
 
 export {
-  columnsA, columnsB, columnsC
+  columnsA,
+  columnsB,
+  columnsC
 }
 
 // projectId: "430100-713f84f9eb4b474fb9c79b333359709a"

@@ -2,7 +2,7 @@ import React from 'react';
 import Highlighter from 'react-highlight-words';
 import {SearchOutlined} from '@ant-design/icons';
 import {Table, Button, Input} from 'antd';
-import {columnsA, columnsB, columnsC} from './tableColumns.jsx';
+import {columnsA, columnsB, columnsC} from './tableColumns';
 import {getMonitorRecognition, getMonitorFinished, getMonitorHistory} from '../api/cloudRecognition';
 
 export default class TableList extends React.Component {
