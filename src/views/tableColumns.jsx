@@ -1,41 +1,46 @@
 import React from 'react';
+import {Button} from 'antd';
 
 const columnsA = [
   {
     title: '学校名称',
     dataIndex: 'schoolName',
     key: 'schoolName',
-    width: 150,
+    sorter: true
   },
   {
     title: '待识别数',
     dataIndex: 'taskTotal',
     key: 'taskTotal',
-    width: 150,
+    width: '10%'
   },
   {
     title: '开始识别时间',
-    dataIndex: 'startTime',
-    key: 'startTime',
-    width: 150,
+    dataIndex: 'humanStartTime',
+    key: 'humanStartTime',
+    width: '18%'
   },
   {
-    title: '结束识别时间',
-    dataIndex: 'endTime',
-    key: 'endTime',
-    width: 150,
+    title: '已耗时间',
+    dataIndex: 'totalTime',
+    key: 'totalTime',
+    width: '15%'
   },
   {
-    title: '平均识别速度',
-    dataIndex: 'recognitionTimes',
-    key: 'recognitionTimes',
-    width: 150,
+    title: '识别进度',
+    dataIndex: 'humanEndTime',
+    key: 'humanEndTime',
+    width: '18%'
   },
   {
-    title: '识别总耗时',
-    dataIndex: 'priority',
-    key: 'priority',
-  },
+    title: '设置优先级',
+    key: 'Action',
+    render: (text, record) => (
+      <Button type="primary" onClick={() => {
+        window.alert(1)
+      }}>设置</Button>
+    )
+  }
 ];
 
 const columnsB = [
@@ -73,7 +78,7 @@ const columnsB = [
     title: '识别总耗时',
     dataIndex: 'priority',
     key: 'priority',
-  },
+  }
 ];
 
 const columnsC = [
@@ -102,18 +107,11 @@ const columnsC = [
     width: '18%'
   },
   {
-    title: '平均识别速度',
-    dataIndex: 'recognitionTimes',
-    key: 'recognitionTimes',
-    render: text => <span>每秒{text}张</span>,
-    width: '15%'
-  },
-  {
     title: '识别总耗时',
-    dataIndex: 'lastRecognitionTime',
-    key: 'lastRecognitionTime',
+    dataIndex: 'totalTime',
+    key: 'totalTime',
     width: '15%'
-  },
+  }
 ];
 
 export {
