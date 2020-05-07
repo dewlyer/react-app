@@ -11,7 +11,7 @@ function handlerPopConfirm(attrs, reload) {
   handlerPriorityUpdate(projectId, subjectCode)
     .then(() => {
       message.success('优先级设置成功');
-      reload()
+      reload();
     })
     .catch(err => {
       console.log(err);

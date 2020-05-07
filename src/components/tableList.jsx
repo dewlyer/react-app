@@ -2,20 +2,155 @@ import React from 'react';
 import Highlighter from 'react-highlight-words';
 import {SearchOutlined} from '@ant-design/icons';
 import {Table, Button, Input} from 'antd';
-import {columnsA, columnsB, columnsC} from './tableColumns';
 import {getMonitorRecognition, getMonitorFinished, getMonitorHistory} from '../api/cloudRecognition';
+import Action from './tableAction';
 
 export default class TableList extends React.Component {
 
-  state = {
-    loading: false,
-    list: [],
-    columnsList: [
-      columnsA,
-      columnsB,
-      columnsC
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      list: [],
+    };
+    this.columnsList = [
+      [
+        {
+          title: '学校名称',
+          dataIndex: 'schoolName',
+          key: 'schoolName',
+          sorter: true
+        },
+        {
+          title: '项目名称',
+          dataIndex: 'projectName',
+          key: 'projectName',
+          width: '20%'
+        },
+        {
+          title: '科目名称',
+          dataIndex: 'subjectName',
+          key: 'subjectName',
+          width: '10%'
+        },
+        {
+          title: '待识别数',
+          dataIndex: 'taskTotal',
+          key: 'taskTotal',
+          width: '10%',
+          render: this.renderTaskTotal
+        },
+        {
+          title: '开始识别时间',
+          dataIndex: 'humanStartTime',
+          key: 'humanStartTime',
+          width: '15%'
+        },
+        {
+          title: '已耗时间',
+          dataIndex: 'totalTime',
+          key: 'totalTime',
+          width: '10%',
+          render: this.renderTotalTime
+        },
+        {
+          title: '设置优先级',
+          key: 'Action',
+          width: '10%',
+          render: this.renderAction
+        }
+      ],
+      [
+        {
+          title: '学校名称',
+          dataIndex: 'schoolName',
+          key: 'schoolName',
+          width: 150,
+        },
+        {
+          title: '待识别数',
+          dataIndex: 'taskTotal',
+          key: 'taskTotal',
+          width: 150,
+        },
+        {
+          title: '开始识别时间',
+          dataIndex: 'startTime',
+          key: 'startTime',
+          width: 150,
+        },
+        {
+          title: '结束识别时间',
+          dataIndex: 'endTime',
+          key: 'endTime',
+          width: 150,
+        },
+        {
+          title: '平均识别速度',
+          dataIndex: 'recognitionTimes',
+          key: 'recognitionTimes',
+          width: 150,
+        },
+        {
+          title: '识别总耗时',
+          dataIndex: 'priority',
+          key: 'priority',
+        }
+      ],
+      [
+        {
+          title: '学校名称',
+          dataIndex: 'schoolName',
+          key: 'schoolName',
+          sorter: true
+        },
+        {
+          title: '项目名称',
+          dataIndex: 'projectName',
+          key: 'projectName',
+          width: '20%'
+        },
+        {
+          title: '科目名称',
+          dataIndex: 'subjectName',
+          key: 'subjectName',
+          width: '10%'
+        },
+        {
+          title: '待识别数',
+          dataIndex: 'taskTotal',
+          key: 'taskTotal',
+          width: '10%',
+          render: this.renderTaskTotal
+        },
+        {
+          title: '开始识别时间',
+          dataIndex: 'humanStartTime',
+          key: 'humanStartTime',
+          width: '15%'
+        },
+        {
+          title: '结束识别时间',
+          dataIndex: 'humanEndTime',
+          key: 'humanEndTime',
+          width: '15%'
+        },
+        {
+          title: '识别总耗时',
+          dataIndex: 'totalTime',
+          key: 'totalTime',
+          width: '10%',
+          render: this.renderTotalTime
+        }
+      ]
     ]
-  };
+  }
+
+  renderTotalTime = (text) => <span>{text}秒</span>;
+
+  renderTaskTotal = (text, record) => <span>{record['finishedTotal'] || 0} / {text}</span>;
+
+  renderAction = (attrs) => <Action attrs={attrs} reload={this.handlerTableListReload}/>;
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -131,14 +266,22 @@ export default class TableList extends React.Component {
     }
   };
 
-  componentDidMount() {
+  getData = () => {
     this.queryTableList().catch(e => console.log(e));
+  };
+
+  handlerTableListReload = () => {
+    this.getData();
+  };
+
+  componentDidMount() {
+    this.getData();
   }
 
   render() {
     const {type} = this.props;
-    const {list, columnsList, loading} = this.state;
-    const columns = columnsList[type];
+    const {list, loading} = this.state;
+    const columns = this.columnsList[type];
     return <Table dataSource={list} columns={columns} loading={loading} rowKey={(r, i) => i.toString()}/>;
   }
 
