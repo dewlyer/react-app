@@ -48,7 +48,7 @@ const columnsA = [
     title: '设置优先级',
     key: 'Action',
     width: '10%',
-    render: (text, record, index) => <Action text={text} record={record} index={index} reload={reload}/>
+    render: (attrs) => <Action attrs={attrs} reload={reload}/>
   }
 ];
 
