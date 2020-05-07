@@ -13,33 +13,39 @@ const columnsA = [
     sorter: true
   },
   {
+    title: '项目名称',
+    dataIndex: 'projectName',
+    key: 'projectName',
+    width: '10%'
+  },
+  {
+    title: '科目名称',
+    dataIndex: 'subjectName',
+    key: 'subjectName',
+    width: '10%'
+  },
+  {
     title: '待识别数',
     dataIndex: 'taskTotal',
     key: 'taskTotal',
-    width: '15%'
+    width: '10%'
   },
   {
     title: '开始识别时间',
     dataIndex: 'humanStartTime',
     key: 'humanStartTime',
-    width: '20%'
+    width: '15%'
   },
   {
     title: '已耗时间',
     dataIndex: 'totalTime',
     key: 'totalTime',
-    width: '15%'
-  },
-  {
-    title: '识别进度',
-    dataIndex: 'humanEndTime',
-    key: 'humanEndTime',
-    width: '15%'
+    width: '10%'
   },
   {
     title: '设置优先级',
     key: 'Action',
-    width: '15%',
+    width: '10%',
     render: (text, record, index) => <Action text={text} record={record} index={index} reload={reload}/>
   }
 ];
@@ -90,28 +96,41 @@ const columnsC = [
     sorter: true
   },
   {
+    title: '项目名称',
+    dataIndex: 'projectName',
+    key: 'projectName',
+    width: '20%'
+  },
+  {
+    title: '科目名称',
+    dataIndex: 'subjectName',
+    key: 'subjectName',
+    width: '10%'
+  },
+  {
     title: '待识别数',
     dataIndex: 'taskTotal',
     key: 'taskTotal',
-    width: '15%'
+    width: '10%'
   },
   {
     title: '开始识别时间',
     dataIndex: 'humanStartTime',
     key: 'humanStartTime',
-    width: '20%'
+    width: '15%'
   },
   {
     title: '结束识别时间',
     dataIndex: 'humanEndTime',
     key: 'humanEndTime',
-    width: '20%'
+    width: '15%'
   },
   {
     title: '识别总耗时',
     dataIndex: 'totalTime',
     key: 'totalTime',
-    width: '15%'
+    width: '10%',
+    render: (text) => <span>{text}秒</span>
   }
 ];
 
