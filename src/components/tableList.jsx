@@ -19,7 +19,7 @@ export default class TableList extends React.Component {
           title: '学校名称',
           dataIndex: 'schoolName',
           key: 'schoolName',
-          sorter: true
+          sorter: this.sortListBySchool
         },
         {
           title: '项目名称',
@@ -102,7 +102,7 @@ export default class TableList extends React.Component {
           title: '学校名称',
           dataIndex: 'schoolName',
           key: 'schoolName',
-          sorter: true
+          sorter: this.sortListBySchool
         },
         {
           title: '项目名称',
@@ -145,6 +145,12 @@ export default class TableList extends React.Component {
       ]
     ]
   }
+
+  sortListBySchool = (a, b) => {
+    const paramsA = a.schoolId + a.projectId;
+    const paramsB = b.schoolId + b.projectId;
+    return paramsA.localeCompare(paramsB);
+  };
 
   renderTotalTime = (text) => <span>{text}秒</span>;
 
@@ -257,7 +263,7 @@ export default class TableList extends React.Component {
       this.setState({loading: true});
       const {data} = await this.getTableListData();
       const list = data && data['recognitionList'];
-      Object.assign(list, this.getStaticList());
+      // Object.assign(list, this.getStaticList());
       this.setState({list});
     } catch (e) {
       throw e;
@@ -271,7 +277,9 @@ export default class TableList extends React.Component {
   };
 
   handlerTableListReload = () => {
-    this.getData();
+    window.setTimeout(() => {
+      this.getData();
+    }, 500);
   };
 
   componentDidMount() {
@@ -282,7 +290,13 @@ export default class TableList extends React.Component {
     const {type} = this.props;
     const {list, loading} = this.state;
     const columns = this.columnsList[type];
-    return <Table dataSource={list} columns={columns} loading={loading} rowKey={(r, i) => i.toString()}/>;
+    return <Table
+      dataSource={list}
+      columns={columns}
+      loading={loading}
+      rowKey={(r, i) => i.toString()}
+      pagination={false}
+    />;
   }
 
 }

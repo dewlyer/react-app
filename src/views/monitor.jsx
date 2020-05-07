@@ -51,7 +51,7 @@ export default class Monitor extends React.Component {
       <Content style={contentStyle}>
         <div className="monitor-info">
           <span>系统识别总速度：</span>
-          <Badge count={speed} style={{backgroundColor: '#1990fe'}} showZero/>
+          <Badge count={speed} overflowCount={9999} style={{backgroundColor: '#1990fe'}} showZero/>
           <span> 张每分钟</span>
         </div>
         <Tabs defaultActiveKey="0">
