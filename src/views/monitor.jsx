@@ -1,5 +1,5 @@
 import React from 'react';
-import './monitor.less';
+import './monitor.scss';
 import {
   // TeamOutlined,
   SnippetsOutlined,
