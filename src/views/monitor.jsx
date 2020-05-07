@@ -45,11 +45,23 @@ export default class Monitor extends React.Component {
     const {
       recognitionTotalOneMinuteBefore: speed = 0,
       recognitionSubjectTotal: process = 0,
-      finishedSubjectTotal: finish = 0
+      finishedSubjectTotal: finish = 0,
+      // 未保存数量
+      waitForSaveTotal,
+      // 待识别普通批次
+      commonRemainderBatch,
+      // 待识别优先批次
+      priorityRemainderBatch,
+      // 待识别慢速批次
+      slowRemainderBatch
     } = info;
     return (
       <Content style={contentStyle}>
         <div className="monitor-info">
+          <span className="item">未保存数量：{waitForSaveTotal}</span>
+          <span className="item">待识别普通批次：{commonRemainderBatch}</span>
+          <span className="item">待识别优先批次：{priorityRemainderBatch}</span>
+          <span className="item">待识别慢速批次：{slowRemainderBatch}</span>
           <span>系统识别总速度：</span>
           <Badge count={speed} overflowCount={9999} style={{backgroundColor: '#1990fe'}} showZero/>
           <span> 张每分钟</span>
