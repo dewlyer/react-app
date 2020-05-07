@@ -10,6 +10,8 @@ export default class TableList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      searchText: '',
+      searchedColumn: '',
       loading: false,
       list: [],
     };
@@ -19,7 +21,8 @@ export default class TableList extends React.Component {
           title: '学校名称',
           dataIndex: 'schoolName',
           key: 'schoolName',
-          sorter: this.sortListBySchool
+          sorter: this.sortListBySchool,
+          ...this.getColumnSearchProps('schoolName')
         },
         {
           title: '项目名称',
@@ -44,7 +47,7 @@ export default class TableList extends React.Component {
           title: '开始识别时间',
           dataIndex: 'humanStartTime',
           key: 'humanStartTime',
-          width: '15%'
+          width: '12%'
         },
         {
           title: '已耗时间',
@@ -54,7 +57,13 @@ export default class TableList extends React.Component {
           render: this.renderTotalTime
         },
         {
-          title: '设置优先级',
+          title: '优先级',
+          dataIndex: 'priority',
+          key: 'priority',
+          width: '10%'
+        },
+        {
+          title: '操作',
           key: 'Action',
           width: '10%',
           render: this.renderAction
@@ -102,7 +111,8 @@ export default class TableList extends React.Component {
           title: '学校名称',
           dataIndex: 'schoolName',
           key: 'schoolName',
-          sorter: this.sortListBySchool
+          sorter: this.sortListBySchool,
+          ...this.getColumnSearchProps('schoolName')
         },
         {
           title: '项目名称',
@@ -174,52 +184,22 @@ export default class TableList extends React.Component {
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
       <div style={{padding: 8}}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{width: 188, marginBottom: 8, display: 'block'}}
-        />
-        <Button
-          type="primary"
-          onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          icon={<SearchOutlined/>}
-          size="small"
-          style={{width: 90, marginRight: 8}}
-        >
-          Search
-        </Button>
-        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{width: 90}}>
-          Reset
-        </Button>
+        <Input placeholder="输入学校名称" value={selectedKeys[0]} ref={node => {this.searchInput = node;}}
+               style={{width: 188, marginBottom: 8, display: 'block'}}
+               onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+               onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}/>
+        <Button size="small" type="primary" icon={<SearchOutlined/>} style={{width: 90, marginRight: 8}}
+                onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}>搜索</Button>
+        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{width: 90}}>重置</Button>
       </div>
     ),
     filterIcon: filtered => <SearchOutlined style={{color: filtered ? '#1890ff' : undefined}}/>,
-    onFilter: (value, record) =>
-      record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: visible => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select());
-      }
-    },
-    render: text =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{backgroundColor: '#ffc069', padding: 0}}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text.toString()}
-        />
-      ) : (
-        text
-      ),
+    onFilter: (value, record) => record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {if (visible) {setTimeout(() => this.searchInput.select());}},
+    render: text => this.state.searchedColumn === dataIndex ?
+      (<Highlighter highlightStyle={{backgroundColor: '#ffc069', padding: 0}}
+                    searchWords={[this.state.searchText]} textToHighlight={text.toString()}
+                    autoEscape/>) : (text)
   });
 
   getTableListData = async () => {
@@ -233,30 +213,30 @@ export default class TableList extends React.Component {
     }
   };
 
-  getStaticList = () => {
-    return [
-      {
-        "projectId": "430900-2429577d41c448bfbeeff75632156379",
-        "subjectCode": "004005006",
-        "projectName": "2020年高中三年级理综考试(5)",
-        "subjectName": "理科综合",
-        "schoolId": "3424b507-a3cd-42d9-a62e-165939ee35a8",
-        "schoolName": "桃江县第四中学",
-        "priority": "普通",
-        "taskTotal": 757,
-        "startTime": 1588817425329,
-        "humanStartTime": "2020-05-07 10:10:25",
-        "lastRecognitionTime": 1588816675516,
-        "humanLastRecognitionTime": "2020-05-07 09:57:55",
-        "endTime": 0,
-        "humanEndTime": null,
-        "statusWhenFinish": null,
-        "statusWhenStart": "重新识别",
-        "recognitionTimes": 0,
-        "totalTime": 0
-      }
-    ]
-  };
+  // getStaticList = () => {
+  //   return [
+  //     {
+  //       "projectId": "430900-2429577d41c448bfbeeff75632156379",
+  //       "subjectCode": "004005006",
+  //       "projectName": "2020年高中三年级理综考试(5)",
+  //       "subjectName": "理科综合",
+  //       "schoolId": "3424b507-a3cd-42d9-a62e-165939ee35a8",
+  //       "schoolName": "桃江县第四中学",
+  //       "priority": "普通",
+  //       "taskTotal": 757,
+  //       "startTime": 1588817425329,
+  //       "humanStartTime": "2020-05-07 10:10:25",
+  //       "lastRecognitionTime": 1588816675516,
+  //       "humanLastRecognitionTime": "2020-05-07 09:57:55",
+  //       "endTime": 0,
+  //       "humanEndTime": null,
+  //       "statusWhenFinish": null,
+  //       "statusWhenStart": "重新识别",
+  //       "recognitionTimes": 0,
+  //       "totalTime": 0
+  //     }
+  //   ]
+  // };
 
   queryTableList = async () => {
     try {

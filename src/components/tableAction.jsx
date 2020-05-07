@@ -29,7 +29,7 @@ const Action = (props) => {
     <Popconfirm title="你确认要设置优先级？" okText="确认" cancelText="取消" placement="topRight"
                 onConfirm={() => handlerPopConfirm(attrs, reload)}
                 onCancel={handlerPopCancel}>
-      <Button type="primary" size="small" shape="round" danger>设置</Button>
+      <Button type="primary" size="small" shape="round" danger>设置优先级</Button>
     </Popconfirm>
   );
 };
