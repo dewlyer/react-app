@@ -5,7 +5,7 @@ import {
   SnippetsOutlined,
   CarryOutOutlined
 } from '@ant-design/icons';
-import {Layout, Badge, Tabs, BackTop} from 'antd';
+import {Layout, Badge, message, Tabs, BackTop} from 'antd';
 import TableList from '../components/tableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
@@ -29,7 +29,13 @@ export default class Monitor extends React.Component {
   };
 
   componentDidMount() {
-    this.queryTableList().catch(e => console.log(e));
+    this.queryTableList().catch(res => {
+      console.log(res);
+      const data = {res};
+      if (data && data.message) {
+        message.error(data.message);
+      }
+    });
   }
 
   render() {

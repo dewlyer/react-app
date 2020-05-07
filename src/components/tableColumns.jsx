@@ -16,7 +16,7 @@ const columnsA = [
     title: '项目名称',
     dataIndex: 'projectName',
     key: 'projectName',
-    width: '10%'
+    width: '20%'
   },
   {
     title: '科目名称',
@@ -28,7 +28,8 @@ const columnsA = [
     title: '待识别数',
     dataIndex: 'taskTotal',
     key: 'taskTotal',
-    width: '10%'
+    width: '10%',
+    render: (text, record) => <span>{record['finishedTotal'] || 0} / {text}</span>
   },
   {
     title: '开始识别时间',
@@ -40,7 +41,8 @@ const columnsA = [
     title: '已耗时间',
     dataIndex: 'totalTime',
     key: 'totalTime',
-    width: '10%'
+    width: '10%',
+    render: (text) => <span>{text}秒</span>
   },
   {
     title: '设置优先级',
@@ -111,7 +113,8 @@ const columnsC = [
     title: '待识别数',
     dataIndex: 'taskTotal',
     key: 'taskTotal',
-    width: '10%'
+    width: '10%',
+    render: (text, record) => <span>{record['finishedTotal'] || 0} / {text}</span>
   },
   {
     title: '开始识别时间',
