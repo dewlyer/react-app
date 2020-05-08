@@ -1,7 +1,7 @@
 import React from 'react';
 import './monitor.scss';
 import {
-  // TeamOutlined,
+  TeamOutlined,
   SnippetsOutlined,
   CarryOutOutlined
 } from '@ant-design/icons';
@@ -59,7 +59,8 @@ export default class Monitor extends React.Component {
     const {TabPane} = Tabs;
     const {
       recognitionSubjectTotal: process = 0,
-      finishedSubjectTotal: finish = 0
+      finishedSubjectTotal: finish = 0,
+      waitSubjectTotal: wait = 0
     } = info;
     return (
       <Content style={contentStyle}>
@@ -68,9 +69,9 @@ export default class Monitor extends React.Component {
           <TabPane key="0" tab={<span><SnippetsOutlined/> 识别中：{process}</span>}>
             <TableList type={0} key={`process_${key}`}/>
           </TabPane>
-          {/*<TabPane key="1" tab={<span><TeamOutlined/> 排队中：{speed}</span>}>
-            <TableList type={1}/>
-          </TabPane>*/}
+          <TabPane key="1" tab={<span><TeamOutlined/> 排队中：{wait}</span>}>
+            <TableList type={1} key={`wait_${key}`}/>
+          </TabPane>
           <TabPane key="2" tab={<span><CarryOutOutlined/> 已完成：{finish}</span>}>
             <TableList type={2} key={`finish_${key}`}/>
           </TabPane>

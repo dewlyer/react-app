@@ -14,6 +14,10 @@ export function getMonitorFinished(query) {
   return request.get(base + '/monitor/finished', {params: query});
 }
 
+export function getMonitorWait(query) {
+  return request.get(base + '/monitor/waitList', {params: query});
+}
+
 export function getMonitorHistory(query) {
   return request.get(base + '/monitor/history', {params: query});
 }

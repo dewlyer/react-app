@@ -6,14 +6,13 @@ import {Table, Button, Input} from 'antd';
 import Action from './tableAction';
 import History from './tableHistory';
 import {
-  // getMonitorHistory,
+  getMonitorWait,
   getMonitorFinished,
   getMonitorRecognition
 } from '../api/cloudRecognition';
 
 @withSizes(({height}) => ({windowHeight: height}))
 class TableList extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +20,7 @@ class TableList extends React.Component {
       searchedColumn: '',
       loading: false,
       scroll: {y: 600},
+      listSorted: false,
       list: [],
     };
     this.columnsList = [
@@ -119,7 +119,7 @@ class TableList extends React.Component {
           title: '学校名称',
           dataIndex: 'schoolName',
           key: 'schoolName',
-          sorter: this.sortListBySchool,
+          sorter: this.state.listSorted && this.sortListBySchool,
           ...this.getColumnSearchProps('schoolName')
         },
         {
@@ -244,9 +244,9 @@ class TableList extends React.Component {
           item.children = [];
         });
         break;
-      // case 1:
-      //   res = await getMonitorHistory();
-      //   break;
+      case 1:
+        res = await getMonitorWait();
+        break;
       default:
         res = await getMonitorRecognition();
         list = this.getRecognitionList(res);
@@ -350,7 +350,6 @@ class TableList extends React.Component {
       pagination={false}
     />;
   }
-
 }
 
 export default TableList;
