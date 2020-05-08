@@ -22,9 +22,15 @@ const History = (props) => {
     }
   };
 
+  const {statusWhenFinish, statusWhenStart} = attrs;
+
   return attrs.children ?
-    (<Button type="primary" size="small" shape="round" danger
-             onClick={handlerHistoryClick}>查看历史</Button>) : null;
+    <Button type="primary" size="small" shape="round" danger onClick={handlerHistoryClick}>查看历史</Button> :
+    (<span>
+      开始动作: {statusWhenStart}
+      <br/>
+      结束动作: {statusWhenFinish}
+    </span>);
 };
 
 export default History;

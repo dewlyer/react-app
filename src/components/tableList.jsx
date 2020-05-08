@@ -18,6 +18,7 @@ export default class TableList extends React.Component {
       searchText: '',
       searchedColumn: '',
       loading: false,
+      scroll: {y: 600},
       list: [],
     };
     this.columnsList = [
@@ -129,7 +130,7 @@ export default class TableList extends React.Component {
           title: '科目名称',
           dataIndex: 'subjectName',
           key: 'subjectName',
-          width: '10%'
+          width: '8%'
         },
         {
           title: '待识别数',
@@ -137,6 +138,12 @@ export default class TableList extends React.Component {
           key: 'taskTotal',
           width: '10%',
           render: this.renderTaskTotal
+        },
+        {
+          title: '识别次数',
+          dataIndex: 'recognitionTimes',
+          key: 'recognitionTimes',
+          width: '8%'
         },
         {
           title: '开始识别时间',
@@ -154,11 +161,11 @@ export default class TableList extends React.Component {
           title: '识别总耗时',
           dataIndex: 'totalTime',
           key: 'totalTime',
-          width: '10%',
+          width: '8%',
           render: this.renderTotalTime
         },
         {
-          title: '操作',
+          title: '状态',
           key: 'Action',
           width: '10%',
           render: this.renderHistory
@@ -306,13 +313,15 @@ export default class TableList extends React.Component {
 
   render() {
     const {type} = this.props;
-    const {list, loading} = this.state;
+    const {list, loading, scroll} = this.state;
     const columns = this.columnsList[type];
     return <Table
       dataSource={list}
       columns={columns}
       loading={loading}
       expandRowByClick={true}
+      indentSize={30}
+      scroll={scroll}
       pagination={false}
     />;
   }
