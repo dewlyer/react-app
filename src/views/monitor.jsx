@@ -5,13 +5,15 @@ import {
   SnippetsOutlined,
   CarryOutOutlined
 } from '@ant-design/icons';
-import {Layout, Badge, Tag, message, Tabs, BackTop} from 'antd';
+import {Layout, message, Tabs, BackTop} from 'antd';
+import MonitorInfo from '../components/monitorInfo';
 import TableList from '../components/tableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
 export default class Monitor extends React.Component {
 
   state = {
+    key: 0,
     contentStyle: {
       margin: '0 50px',
       padding: '15px 25px'
@@ -19,7 +21,7 @@ export default class Monitor extends React.Component {
     info: {}
   };
 
-  queryTableList = async () => {
+  queryTableListInfo = async () => {
     try {
       const {data} = await getMonitorInfo();
       this.setState({info: data});
@@ -28,53 +30,49 @@ export default class Monitor extends React.Component {
     }
   };
 
-  componentDidMount() {
-    this.queryTableList().catch(res => {
-      console.log(res);
+  updateInfoData = () => {
+    this.queryTableListInfo().catch(res => {
       const data = {res};
       if (data && data.message) {
         message.error(data.message);
       }
     });
+  };
+
+  updateInfoKey = () => {
+    let {key} = this.state;
+    key++;
+    this.setState({key});
+  };
+
+  componentDidMount() {
+    this.updateInfoData();
+    window.setInterval(() => {
+      this.updateInfoData();
+      this.updateInfoKey();
+    }, 30000);
   }
 
   render() {
-    const {contentStyle, info} = this.state;
+    const {contentStyle, info, key} = this.state;
     const {Content} = Layout;
     const {TabPane} = Tabs;
     const {
-      recognitionTotalOneMinuteBefore: speed = 0,
       recognitionSubjectTotal: process = 0,
-      finishedSubjectTotal: finish = 0,
-      // 未保存数量
-      waitForSaveTotal,
-      // 待识别普通批次
-      commonRemainderBatch,
-      // 待识别优先批次
-      priorityRemainderBatch,
-      // 待识别慢速批次
-      slowRemainderBatch
+      finishedSubjectTotal: finish = 0
     } = info;
     return (
       <Content style={contentStyle}>
-        <div className="monitor-info">
-          <Tag color="#f50" className="item">未保存数量：{waitForSaveTotal}</Tag>
-          <Tag color="#2db7f5" className="item">待识别普通批次：{commonRemainderBatch}</Tag>
-          <Tag color="#87d068" className="item">待识别优先批次：{priorityRemainderBatch}</Tag>
-          <Tag color="#eab04c" className="item">待识别慢速批次：{slowRemainderBatch}</Tag>
-          <span>系统识别总速度：</span>
-          <Badge count={speed} overflowCount={9999} style={{backgroundColor: '#1990fe'}} showZero/>
-          <span> 张每分钟</span>
-        </div>
+        <MonitorInfo info={info}/>
         <Tabs defaultActiveKey="0">
           <TabPane key="0" tab={<span><SnippetsOutlined/> 识别中：{process}</span>}>
-            <TableList type={0}/>
+            <TableList type={0} key={`process_${key}`}/>
           </TabPane>
           {/*<TabPane key="1" tab={<span><TeamOutlined/> 排队中：{speed}</span>}>
             <TableList type={1}/>
           </TabPane>*/}
           <TabPane key="2" tab={<span><CarryOutOutlined/> 已完成：{finish}</span>}>
-            <TableList type={2}/>
+            <TableList type={2} key={`finish_${key}`}/>
           </TabPane>
         </Tabs>
         <BackTop/>

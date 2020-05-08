@@ -1,4 +1,5 @@
 import React from 'react';
+import withSizes from 'react-sizes';
 import Highlighter from 'react-highlight-words';
 import {SearchOutlined} from '@ant-design/icons';
 import {Table, Button, Input} from 'antd';
@@ -9,7 +10,6 @@ import {
   getMonitorFinished,
   getMonitorRecognition
 } from '../api/cloudRecognition';
-import withSizes from 'react-sizes';
 
 @withSizes(({height}) => ({windowHeight: height}))
 class TableList extends React.Component {
