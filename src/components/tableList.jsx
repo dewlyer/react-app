@@ -2,9 +2,13 @@ import React from 'react';
 import Highlighter from 'react-highlight-words';
 import {SearchOutlined} from '@ant-design/icons';
 import {Table, Button, Input} from 'antd';
-import {getMonitorRecognition, getMonitorFinished, getMonitorHistory} from '../api/cloudRecognition';
 import Action from './tableAction';
 import History from './tableHistory';
+import {
+  // getMonitorHistory,
+  getMonitorFinished,
+  getMonitorRecognition
+} from '../api/cloudRecognition';
 
 export default class TableList extends React.Component {
 
@@ -215,15 +219,31 @@ export default class TableList extends React.Component {
                     autoEscape/>) : (text)
   });
 
+  getRecognitionList = (res) => {
+    const {data} = res;
+    return !data ? [] : data['recognitionList'];
+  };
+
   getTableListData = async () => {
+    let res, list;
     switch (this.props.type) {
       case 2:
-        return await getMonitorFinished();
+        res = await getMonitorFinished();
+        list = this.getRecognitionList(res);
+        list.forEach((item, index) => {
+          item.key = String(index);
+          item.children = [];
+        });
+        break;
       // case 1:
-      //   return await getMonitorHistory();
+      //   res = await getMonitorHistory();
+      //   break;
       default:
-        return await getMonitorRecognition();
+        res = await getMonitorRecognition();
+        list = this.getRecognitionList(res);
+        // Object.assign(list, this.getStaticList());
     }
+    return list;
   };
 
   getStaticList = () => {
@@ -247,30 +267,7 @@ export default class TableList extends React.Component {
         "statusWhenFinish": null,
         "statusWhenStart": "重新识别",
         "recognitionTimes": 0,
-        "totalTime": 0,
-        children: [
-          {
-            "key": "ssss_0",
-            "projectId": "430900-2429577d41c448bfbeeff75632156379",
-            "subjectCode": "004005006",
-            "projectName": "2020年高中三年级理综考试(5)",
-            "subjectName": "理科综合",
-            "schoolId": "3424b507-a3cd-42d9-a62e-165939ee35a8",
-            "schoolName": "桃江县第四中学",
-            "priority": "普通",
-            "taskTotal": 757,
-            "startTime": 1588817425329,
-            "humanStartTime": "2020-05-07 10:10:25",
-            "lastRecognitionTime": 1588816675516,
-            "humanLastRecognitionTime": "2020-05-07 09:57:55",
-            "endTime": 0,
-            "humanEndTime": null,
-            "statusWhenFinish": null,
-            "statusWhenStart": "重新识别",
-            "recognitionTimes": 0,
-            "totalTime": 0
-          }
-        ]
+        "totalTime": 0
       }
     ]
   };
@@ -278,13 +275,7 @@ export default class TableList extends React.Component {
   queryTableList = async () => {
     try {
       this.setState({loading: true});
-      const {data} = await this.getTableListData();
-      const list = data && data['recognitionList'];
-      list.forEach((item, index) => {
-        item.key = String(index);
-        item.children = [];
-      });
-      Object.assign(list, this.getStaticList());
+      const list =  await this.getTableListData();
       this.setState({list});
     } catch (e) {
       throw e;
@@ -304,7 +295,6 @@ export default class TableList extends React.Component {
   };
 
   handlerChildShow = (index, children) => {
-    console.log(index, children);
     const {list} = this.state;
     list[index].children = children;
     this.setState({list});
@@ -323,7 +313,6 @@ export default class TableList extends React.Component {
       columns={columns}
       loading={loading}
       expandRowByClick={true}
-      rowKey="key"
       pagination={false}
     />;
   }
