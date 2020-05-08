@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, message} from 'antd';
+import {Button, Tag, message} from 'antd';
 import {getMonitorHistory} from '../api/cloudRecognition';
 
 const History = (props) => {
@@ -27,9 +27,9 @@ const History = (props) => {
   return attrs.children ?
     <Button type="primary" size="small" shape="round" danger onClick={handlerHistoryClick}>查看历史</Button> :
     (<span>
-      开始动作: {statusWhenStart}
+      <Tag color="green" style={{margin: '1px'}}>开始动作: {statusWhenStart}</Tag>
       <br/>
-      结束动作: {statusWhenFinish}
+      <Tag color="red" style={{margin: '1px'}}>结束动作: {statusWhenFinish}</Tag>
     </span>);
 };
 
