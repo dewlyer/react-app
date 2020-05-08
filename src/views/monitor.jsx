@@ -5,7 +5,7 @@ import {
   SnippetsOutlined,
   CarryOutOutlined
 } from '@ant-design/icons';
-import {Layout, Badge, message, Tabs, BackTop} from 'antd';
+import {Layout, Badge, Tag, message, Tabs, BackTop} from 'antd';
 import TableList from '../components/tableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
@@ -58,10 +58,10 @@ export default class Monitor extends React.Component {
     return (
       <Content style={contentStyle}>
         <div className="monitor-info">
-          <span className="item">未保存数量：{waitForSaveTotal}</span>
-          <span className="item">待识别普通批次：{commonRemainderBatch}</span>
-          <span className="item">待识别优先批次：{priorityRemainderBatch}</span>
-          <span className="item">待识别慢速批次：{slowRemainderBatch}</span>
+          <Tag color="#f50" className="item">未保存数量：{waitForSaveTotal}</Tag>
+          <Tag color="#2db7f5" className="item">待识别普通批次：{commonRemainderBatch}</Tag>
+          <Tag color="#87d068" className="item">待识别优先批次：{priorityRemainderBatch}</Tag>
+          <Tag color="#eab04c" className="item">待识别慢速批次：{slowRemainderBatch}</Tag>
           <span>系统识别总速度：</span>
           <Badge count={speed} overflowCount={9999} style={{backgroundColor: '#1990fe'}} showZero/>
           <span> 张每分钟</span>
