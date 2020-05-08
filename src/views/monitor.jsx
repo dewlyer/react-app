@@ -50,7 +50,7 @@ export default class Monitor extends React.Component {
     window.setInterval(() => {
       this.updateInfoData();
       this.updateInfoKey();
-    }, 30000);
+    }, 60000);
   }
 
   render() {

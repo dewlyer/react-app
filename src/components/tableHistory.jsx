@@ -3,19 +3,19 @@ import {Button, Tag, message} from 'antd';
 import {getMonitorHistory} from '../api/cloudRecognition';
 
 const History = (props) => {
-  const {attrs, index, child} = props;
+  const {attrs, child} = props;
 
   const handlerHistoryList = (projectId, subjectCode) => {
     return getMonitorHistory({projectId, subjectCode});
   };
 
   const handlerHistoryClick = async () => {
-    const {projectId, subjectCode} = attrs;
+    const {projectId, subjectCode, key} = attrs;
     try {
       const {data} = await handlerHistoryList(projectId, subjectCode);
       const list = data ? data['recognitionList'] : [];
-      list.forEach((item, i) => item.key = `${index}_${i}`);
-      child(index, list);
+      list.forEach((item, index) => item.key = `${key}_${index}`);
+      child(key, list);
     } catch (err) {
       console.log(err);
       message.error(err);

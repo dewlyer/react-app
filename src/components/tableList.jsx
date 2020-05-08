@@ -188,7 +188,7 @@ class TableList extends React.Component {
 
   renderAction = (attrs) => <Action attrs={attrs} reload={this.handlerTableListReload}/>;
 
-  renderHistory = (attrs, record, index) => <History attrs={attrs} index={index} child={this.handlerChildShow}/>;
+  renderHistory = (attrs) => <History attrs={attrs} child={this.handlerChildShow}/>;
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -303,10 +303,13 @@ class TableList extends React.Component {
     }, 500);
   };
 
-  handlerChildShow = (index, children) => {
+  handlerChildShow = (key, children) => {
     const {list} = this.state;
-    list[index].children = children;
-    this.setState({list});
+    const index = list.findIndex(item => item.key === key);
+    if (~index) {
+      list[index].children = children;
+      this.setState({list});
+    }
   };
 
   updateScrollData = () => {
