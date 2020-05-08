@@ -241,7 +241,7 @@ export default class TableList extends React.Component {
       default:
         res = await getMonitorRecognition();
         list = this.getRecognitionList(res);
-        // Object.assign(list, this.getStaticList());
+      // Object.assign(list, this.getStaticList());
     }
     return list;
   };
@@ -275,7 +275,7 @@ export default class TableList extends React.Component {
   queryTableList = async () => {
     try {
       this.setState({loading: true});
-      const list =  await this.getTableListData();
+      const list = await this.getTableListData();
       this.setState({list});
     } catch (e) {
       throw e;
