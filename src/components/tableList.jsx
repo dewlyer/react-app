@@ -9,8 +9,10 @@ import {
   getMonitorFinished,
   getMonitorRecognition
 } from '../api/cloudRecognition';
+import withSizes from 'react-sizes';
 
-export default class TableList extends React.Component {
+@withSizes(({height}) => ({windowHeight: height}))
+class TableList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -307,8 +309,28 @@ export default class TableList extends React.Component {
     this.setState({list});
   };
 
+  updateScrollData = () => {
+    const {windowHeight} = this.props;
+    const scroll = {
+      y: Math.max(windowHeight - 206 - 85, 300)
+    };
+    this.setState({scroll})
+  };
+
+  resizeListener = () => {
+    window.setTimeout(() => {
+      this.updateScrollData();
+    }, 0)
+  };
+
   componentDidMount() {
+    window.addEventListener('resize', this.resizeListener);
+    this.resizeListener();
     this.getData();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeListener);
   }
 
   render() {
@@ -327,3 +349,5 @@ export default class TableList extends React.Component {
   }
 
 }
+
+export default TableList;
