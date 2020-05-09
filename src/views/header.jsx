@@ -14,7 +14,7 @@ export default class Header extends React.Component {
     const {Header} = Layout;
     return (
       <Header style={headStyle}>
-        <PageHeader className="site-page-header" title="云端识别监控" subTitle="A佳教育校园版云端识别监控系统"
+        <PageHeader className="site-page-header" title="云端识别监控" subTitle="A佳教育实时监控系统（校园版）"
          avatar={{src: logo}}/>
       </Header>
     );

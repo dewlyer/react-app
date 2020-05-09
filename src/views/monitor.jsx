@@ -11,7 +11,6 @@ import TableList from '../components/tableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
 export default class Monitor extends React.Component {
-
   state = {
     key: 0,
     contentStyle: {
@@ -80,5 +79,4 @@ export default class Monitor extends React.Component {
       </Content>
     );
   }
-
 }
