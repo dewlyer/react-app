@@ -17,9 +17,9 @@ const MonitorInfo = (props) => {
 
   return (
     <div className="monitor-info">
-      <span>系统识别总速度：</span>
+      <span>识别总速度：</span>
       <Badge count={speed} overflowCount={9999} style={{backgroundColor: '#1990fe'}} showZero/>
-      <span> 张每分钟</span>
+      <span> 张 / 分钟</span>
       <Tag color="#87d068" className="item">待识别优先批次：{priorityRemainderBatch}</Tag>
       <Tag color="#2db7f5" className="item">待识别普通批次：{commonRemainderBatch}</Tag>
       <Tag color="#eab04c" className="item">待识别慢速批次：{slowRemainderBatch}</Tag>
