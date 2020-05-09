@@ -82,36 +82,52 @@ class TableList extends React.Component {
           title: '学校名称',
           dataIndex: 'schoolName',
           key: 'schoolName',
-          width: 150,
+          sorter: this.sortListBySchool,
+          ...this.getColumnSearchProps('schoolName')
+        },
+        {
+          title: '项目名称',
+          dataIndex: 'projectName',
+          key: 'projectName',
+          width: '20%'
+        },
+        {
+          title: '科目名称',
+          dataIndex: 'subjectName',
+          key: 'subjectName',
+          width: '10%'
         },
         {
           title: '待识别数',
           dataIndex: 'taskTotal',
           key: 'taskTotal',
-          width: 150,
+          width: '10%',
+          render: this.renderTaskTotal
         },
         {
           title: '开始识别时间',
-          dataIndex: 'startTime',
-          key: 'startTime',
-          width: 150,
+          dataIndex: 'humanStartTime',
+          key: 'humanStartTime',
+          width: '12%'
         },
         {
-          title: '结束识别时间',
-          dataIndex: 'endTime',
-          key: 'endTime',
-          width: 150,
+          title: '已耗时间',
+          dataIndex: 'totalTime',
+          key: 'totalTime',
+          width: '10%',
+          render: this.renderTotalTime
         },
         {
-          title: '平均识别速度',
-          dataIndex: 'recognitionTimes',
-          key: 'recognitionTimes',
-          width: 150,
-        },
-        {
-          title: '识别总耗时',
+          title: '优先级',
           dataIndex: 'priority',
           key: 'priority',
+          width: '10%'
+        },
+        {
+          title: '操作',
+          key: 'Action',
+          width: '10%',
+          render: this.renderAction
         }
       ],
       [
