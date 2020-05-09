@@ -271,31 +271,31 @@ class TableList extends React.Component {
     return list;
   };
 
-  getStaticList = () => {
-    return [
-      {
-        "key": "ssss",
-        "projectId": "430900-2429577d41c448bfbeeff75632156379",
-        "subjectCode": "004005006",
-        "projectName": "2020年高中三年级理综考试(5)",
-        "subjectName": "理科综合",
-        "schoolId": "3424b507-a3cd-42d9-a62e-165939ee35a8",
-        "schoolName": "桃江县第四中学",
-        "priority": "普通",
-        "taskTotal": 757,
-        "startTime": 1588817425329,
-        "humanStartTime": "2020-05-07 10:10:25",
-        "lastRecognitionTime": 1588816675516,
-        "humanLastRecognitionTime": "2020-05-07 09:57:55",
-        "endTime": 0,
-        "humanEndTime": null,
-        "statusWhenFinish": null,
-        "statusWhenStart": "重新识别",
-        "recognitionTimes": 0,
-        "totalTime": 0
-      }
-    ]
-  };
+  // getStaticList = () => {
+  //   return [
+  //     {
+  //       "key": "ssss",
+  //       "projectId": "430900-2429577d41c448bfbeeff75632156379",
+  //       "subjectCode": "004005006",
+  //       "projectName": "2020年高中三年级理综考试(5)",
+  //       "subjectName": "理科综合",
+  //       "schoolId": "3424b507-a3cd-42d9-a62e-165939ee35a8",
+  //       "schoolName": "桃江县第四中学",
+  //       "priority": "普通",
+  //       "taskTotal": 757,
+  //       "startTime": 1588817425329,
+  //       "humanStartTime": "2020-05-07 10:10:25",
+  //       "lastRecognitionTime": 1588816675516,
+  //       "humanLastRecognitionTime": "2020-05-07 09:57:55",
+  //       "endTime": 0,
+  //       "humanEndTime": null,
+  //       "statusWhenFinish": null,
+  //       "statusWhenStart": "重新识别",
+  //       "recognitionTimes": 0,
+  //       "totalTime": 0
+  //     }
+  //   ]
+  // };
 
   queryTableList = async () => {
     try {
@@ -331,7 +331,7 @@ class TableList extends React.Component {
   updateScrollData = () => {
     const {windowHeight} = this.props;
     const scroll = {
-      y: Math.max(windowHeight - 206 - 85, 300)
+      y: Math.max(windowHeight - 205 - 47, 300)
     };
     this.setState({scroll})
   };
