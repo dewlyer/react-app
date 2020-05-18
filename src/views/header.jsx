@@ -7,10 +7,12 @@ function Header() {
   const {Header} = Layout;
   return (
     <Header style={headStyle}>
-      <PageHeader className="site-page-header"
-                  title="云端识别监控"
-                  subTitle="A佳教育实时监控系统（校园版）"
-                  avatar={{src: logo}}/>
+      <PageHeader
+        title="云端识别监控"
+        subTitle="A佳教育实时监控系统（校园版）"
+        className="site-page-header"
+        avatar={{src: logo}}
+      />
     </Header>
   )
 }
