@@ -22,7 +22,6 @@ const MonitorInfo = (props) => {
   const [batchSlow, setBatchSlow] = useState(0);
   const [save, setSave] = useState(0);
 
-
   useEffect(() => {
     const {speed, normal, fast, slow, save} = getInfoNumbers(info);
     setSpeed(speed);

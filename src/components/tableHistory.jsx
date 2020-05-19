@@ -24,13 +24,17 @@ const History = (props) => {
 
   const {statusWhenFinish, statusWhenStart} = attrs;
 
-  return attrs.children ?
-    <Button type="primary" size="small" shape="round" danger onClick={handlerHistoryClick}>查看历史</Button> :
-    (<span>
+  return attrs.children ? (
+    <Button type="primary" size="small" shape="round" danger onClick={handlerHistoryClick}>
+      查看历史
+    </Button>
+  ) : (
+    <span>
       <Tag color="green" style={{margin: '1px'}}>开始动作: {statusWhenStart}</Tag>
       <br/>
       <Tag color="red" style={{margin: '1px'}}>结束动作: {statusWhenFinish}</Tag>
-    </span>);
+    </span>
+  );
 };
 
 export default History;
