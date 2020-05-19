@@ -254,20 +254,19 @@ class TableList extends React.Component {
     switch (this.props.type) {
       case 2:
         res = await getMonitorFinished();
-        list = this.getRecognitionList(res);
-        list.forEach((item, index) => {
-          item.key = String(index);
-          item.children = [];
-        });
         break;
       case 1:
         res = await getMonitorWait();
         break;
       default:
         res = await getMonitorRecognition();
-        list = this.getRecognitionList(res);
-      // Object.assign(list, this.getStaticList());
     }
+    list = this.getRecognitionList(res);
+    // Object.assign(list, this.getStaticList());
+    list.forEach((item, index) => {
+      item.key = String(index);
+      item.children = [];
+    });
     return list;
   };
 

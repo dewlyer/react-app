@@ -30,7 +30,7 @@ const MonitorInfo = (props) => {
     setBatchFast(fast);
     setBatchSlow(slow);
     setSave(save)
-  });
+  }, [info]);
 
   return (
     <div className="monitor-info">
