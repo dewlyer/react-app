@@ -250,7 +250,7 @@ class TableList extends React.Component {
   };
 
   getTableListData = async () => {
-    let res, list;
+    let res;
     switch (this.props.type) {
       case 2:
         res = await getMonitorFinished();
@@ -261,12 +261,14 @@ class TableList extends React.Component {
       default:
         res = await getMonitorRecognition();
     }
-    list = this.getRecognitionList(res);
-    // Object.assign(list, this.getStaticList());
+    const list = this.getRecognitionList(res);
     list.forEach((item, index) => {
       item.key = String(index);
-      item.children = [];
+      if (this.props.type === 2) {
+        item.children = [];
+      }
     });
+    // Object.assign(list, this.getStaticList());
     return list;
   };
 

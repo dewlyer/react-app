@@ -5,7 +5,8 @@ switch (process.env.NODE_ENV) {
     baseUrl = 'http://test.ajia.cn';
     break;
   default:
-    baseUrl = 'http://y.ajia.cn';
+    baseUrl = '';
+    // baseUrl = 'http://y.ajia.cn';
 }
 
 export default baseUrl
