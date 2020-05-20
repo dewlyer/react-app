@@ -3,7 +3,7 @@
   "description": "xz-cloud-recognition",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://www.ajia.cn/recognition-server",
+  "homepage": "http://www.ajia.cn/recognition-server/",
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "@babel/core": "7.4.3",

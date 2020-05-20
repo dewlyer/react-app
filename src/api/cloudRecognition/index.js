@@ -1,6 +1,7 @@
 import request from '../axios';
 
-const base = '/cloudRecognition';
+// const base = './';
+const base = process.env.PUBLIC_URL;
 
 export function getMonitorInfo(query) {
   return request.get(base + '/monitor/info', {params: query});
