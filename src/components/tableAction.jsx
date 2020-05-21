@@ -9,14 +9,13 @@ const Action = (props) => {
     return updateMonitorPriority({projectId, subjectCode});
   };
 
-  const handlerPopConfirm = async (attrs, reload) => {
+  const handlerPopConfirm = async () => {
     const {projectId, subjectCode} = attrs;
     try {
       await handlerPriorityUpdate(projectId, subjectCode);
       message.success('优先级设置成功');
       reload();
     } catch (err) {
-      console.log(err);
       message.error(err);
     }
   };
@@ -27,8 +26,7 @@ const Action = (props) => {
 
   return (
     <Popconfirm title="你确认要设置优先级？" okText="确认" cancelText="取消" placement="topRight"
-                onConfirm={() => handlerPopConfirm(attrs, reload)}
-                onCancel={handlerPopCancel}>
+                onConfirm={handlerPopConfirm} onCancel={handlerPopCancel}>
       <Button type="primary" size="small" shape="round" danger>设置优先级</Button>
     </Popconfirm>
   );

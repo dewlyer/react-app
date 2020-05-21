@@ -33,11 +33,11 @@ const History = (props) => {
       查看历史
     </Button>
   ) : (
-    <span>
+    <>
       <Tag color="green" style={{margin: '1px'}}>开始动作: {start}</Tag>
       <br/>
       <Tag color="red" style={{margin: '1px'}}>结束动作: {finish}</Tag>
-    </span>
+    </>
   );
 };
 
