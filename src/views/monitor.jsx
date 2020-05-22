@@ -4,7 +4,7 @@ import {TeamOutlined, SnippetsOutlined, CarryOutOutlined} from '@ant-design/icon
 import {Layout, message, Tabs, BackTop} from 'antd';
 import MonitorInfo from '../components/MonitorInfo';
 import TableList from '../components/TableList';
-import {getMonitorInfo} from '../api/cloudRecognition';
+import {getMonitorInfo} from '../api/recognition';
 
 export default class Monitor extends React.Component {
   state = {

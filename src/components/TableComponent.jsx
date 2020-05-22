@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Popconfirm, Button, message, Tag} from 'antd';
-import {getMonitorHistory, updateMonitorPriority} from '../api/cloudRecognition';
+import {getMonitorHistory, updateMonitorPriority} from '../api/recognition';
 
 export const Action = (props) => {
   const {attrs, reload} = props;

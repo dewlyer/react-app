@@ -8,7 +8,7 @@ import {
   getMonitorWait,
   getMonitorFinished,
   getMonitorRecognition
-} from '../api/cloudRecognition';
+} from '../api/recognition';
 
 @withSizes(({height}) => ({windowHeight: height}))
 class TableList extends React.Component {
