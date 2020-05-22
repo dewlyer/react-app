@@ -14,7 +14,7 @@ function Header() {
         avatar={{src: logo}}
       />
     </Header>
-  )
+  );
 }
 
 export default Header;
