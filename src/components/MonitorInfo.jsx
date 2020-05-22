@@ -9,9 +9,7 @@ const getInfoNumbers = (info) => {
     slowRemainderBatch: slow = 0,     // 待识别慢速批次
     waitForSaveTotal: save = 0        // 未保存数量
   } = info;
-  return {
-    speed, normal, fast, slow, save
-  }
+  return {speed, normal, fast, slow, save};
 };
 
 const MonitorInfo = (props) => {
@@ -28,7 +26,7 @@ const MonitorInfo = (props) => {
     setBatchNormal(normal);
     setBatchFast(fast);
     setBatchSlow(slow);
-    setSave(save)
+    setSave(save);
   }, [info]);
 
   return (

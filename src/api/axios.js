@@ -46,4 +46,4 @@ service.interceptors.response.use(
   (error) => Promise.reject(error)
 );
 
-export default service
+export default service;

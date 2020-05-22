@@ -2,12 +2,19 @@ import React, {useState} from 'react';
 import {Popconfirm, Button, message, Tag} from 'antd';
 import {getMonitorHistory, updateMonitorPriority} from '../api/recognition';
 
+const getHistoryList = async (projectId, subjectCode, key) => {
+  const {data} = await getMonitorHistory({projectId, subjectCode});
+  const list = data ? data['recognitionList'] : [];
+  list.forEach((item, index) => item.key = `${key}_${index}`);
+  return list
+};
+
+const handlerPriorityUpdate = (projectId, subjectCode) => {
+  return updateMonitorPriority({projectId, subjectCode});
+};
+
 export const Action = (props) => {
   const {attrs, reload} = props;
-
-  const handlerPriorityUpdate = (projectId, subjectCode) => {
-    return updateMonitorPriority({projectId, subjectCode});
-  };
 
   const handlerPopConfirm = async () => {
     const {projectId, subjectCode} = attrs;
@@ -19,7 +26,6 @@ export const Action = (props) => {
       message.error(err);
     }
   };
-
   const handlerPopCancel = () => {
     message.info('取消设置优先级');
   };
@@ -32,15 +38,11 @@ export const Action = (props) => {
   );
 };
 
-const getHistoryList = async (projectId, subjectCode, key) => {
-  const {data} = await getMonitorHistory({projectId, subjectCode});
-  const list = data ? data['recognitionList'] : [];
-  list.forEach((item, index) => item.key = `${key}_${index}`);
-  return list
-};
-
 export const History = (props) => {
   const {attrs, child} = props;
+  const {statusWhenStart, statusWhenFinish} = attrs;
+  const [start] = useState(statusWhenStart);
+  const [finish] = useState(statusWhenFinish);
 
   const handlerHistoryClick = async () => {
     try {
@@ -53,10 +55,6 @@ export const History = (props) => {
       message.error(err);
     }
   };
-
-  const {statusWhenStart, statusWhenFinish} = attrs;
-  const [start] = useState(statusWhenStart);
-  const [finish] = useState(statusWhenFinish);
 
   return attrs.children ? (
     <Button type="primary" size="small" shape="round" danger onClick={handlerHistoryClick}>

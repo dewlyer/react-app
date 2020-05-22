@@ -20,7 +20,7 @@ class TableList extends React.Component {
       loading: false,
       scroll: {y: 600},
       listSorted: false,
-      list: [],
+      list: []
     };
     this.columnsList = [
       [
@@ -188,7 +188,7 @@ class TableList extends React.Component {
           render: this.renderHistory
         }
       ]
-    ]
+    ];
   }
 
   sortListBySchool = (a, b) => {
@@ -267,35 +267,8 @@ class TableList extends React.Component {
         item.children = [];
       }
     });
-    // Object.assign(list, this.getStaticList());
     return list;
   };
-
-  // getStaticList = () => {
-  //   return [
-  //     {
-  //       "key": "ssss",
-  //       "projectId": "430900-2429577d41c448bfbeeff75632156379",
-  //       "subjectCode": "004005006",
-  //       "projectName": "2020年高中三年级理综考试(5)",
-  //       "subjectName": "理科综合",
-  //       "schoolId": "3424b507-a3cd-42d9-a62e-165939ee35a8",
-  //       "schoolName": "桃江县第四中学",
-  //       "priority": "普通",
-  //       "taskTotal": 757,
-  //       "startTime": 1588817425329,
-  //       "humanStartTime": "2020-05-07 10:10:25",
-  //       "lastRecognitionTime": 1588816675516,
-  //       "humanLastRecognitionTime": "2020-05-07 09:57:55",
-  //       "endTime": 0,
-  //       "humanEndTime": null,
-  //       "statusWhenFinish": null,
-  //       "statusWhenStart": "重新识别",
-  //       "recognitionTimes": 0,
-  //       "totalTime": 0
-  //     }
-  //   ]
-  // };
 
   queryTableList = async () => {
     try {
@@ -333,13 +306,13 @@ class TableList extends React.Component {
     const scroll = {
       y: Math.max(windowHeight - 205 - 47, 300)
     };
-    this.setState({scroll})
+    this.setState({scroll});
   };
 
   resizeListener = () => {
     window.setTimeout(() => {
       this.updateScrollData();
-    }, 0)
+    }, 0);
   };
 
   componentDidMount() {
@@ -356,15 +329,15 @@ class TableList extends React.Component {
     const {type} = this.props;
     const {list, loading, scroll} = this.state;
     const columns = this.columnsList[type];
-    return <Table
+    return (<Table
       dataSource={list}
       columns={columns}
       loading={loading}
-      expandRowByClick={true}
-      indentSize={30}
       scroll={scroll}
+      indentSize={30}
+      expandRowByClick={true}
       pagination={false}
-    />;
+    />);
   }
 }
 
