@@ -3,8 +3,7 @@ import withSizes from 'react-sizes';
 import Highlighter from 'react-highlight-words';
 import {SearchOutlined} from '@ant-design/icons';
 import {Table, Button, Input} from 'antd';
-import Action from './tableAction';
-import History from './tableHistory';
+import * as TableComponent from './TableComponent';
 import {
   getMonitorWait,
   getMonitorFinished,
@@ -202,9 +201,9 @@ class TableList extends React.Component {
 
   renderTaskTotal = (text, record) => <span>{record['finishedTotal'] || 0} / {text}</span>;
 
-  renderAction = (attrs) => <Action attrs={attrs} reload={this.handlerTableListReload}/>;
+  renderAction = (attrs) => <TableComponent.Action attrs={attrs} reload={this.handlerTableListReload}/>;
 
-  renderHistory = (attrs) => <History attrs={attrs} child={this.handlerChildShow}/>;
+  renderHistory = (attrs) => <TableComponent.History attrs={attrs} child={this.handlerChildShow}/>;
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();

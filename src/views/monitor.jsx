@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import {Layout, message, Tabs, BackTop} from 'antd';
 import MonitorInfo from '../components/monitorInfo';
-import TableList from '../components/tableList';
+import TableList from '../components/TableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
 export default class Monitor extends React.Component {
