@@ -221,26 +221,25 @@ class TableList extends React.Component {
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
       <div style={{padding: 8}}>
-        <Input placeholder="输入学校名称" value={selectedKeys[0]} ref={node => {
-          this.searchInput = node;
-        }}
-               style={{width: 188, marginBottom: 8, display: 'block'}}
+        <Input ref={node => {this.searchInput = node}} placeholder="输入学校名称"
+               value={selectedKeys[0]} style={{width: 188, marginBottom: 8, display: 'block'}}
                onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}/>
         <Button size="small" type="primary" icon={<SearchOutlined/>} style={{width: 90, marginRight: 8}}
                 onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}>搜索</Button>
-        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{width: 90}}>重置</Button>
+        <Button size="small" style={{width: 90}} onClick={() => this.handleReset(clearFilters)}>重置</Button>
       </div>
     ),
     filterIcon: filtered => <SearchOutlined style={{color: filtered ? '#1890ff' : undefined}}/>,
     onFilter: (value, record) => record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownVisibleChange: visible => {
-      if (visible) {setTimeout(() => this.searchInput.select());}
+      if (visible) {
+        window.setTimeout(() => this.searchInput.select());
+      }
     },
-    render: text => this.state.searchedColumn === dataIndex ?
+    render: text => this.state.searchedColumn !== dataIndex ? (text) :
       (<Highlighter highlightStyle={{backgroundColor: '#ffc069', padding: 0}}
-                    searchWords={[this.state.searchText]} textToHighlight={text.toString()}
-                    autoEscape/>) : (text)
+                    searchWords={[this.state.searchText]} textToHighlight={text.toString()} autoEscape/>)
   });
 
   getRecognitionList = (res) => {
