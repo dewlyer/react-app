@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Layout, PageHeader} from 'antd';
-import logo from '../logo.svg';
+import logo from '../assets/logo.svg';
 
 function Header() {
   const [headStyle] = useState({height: 'auto'});
