@@ -6,7 +6,7 @@ const getHistoryList = async (projectId, subjectCode, key) => {
   const {data} = await getMonitorHistory({projectId, subjectCode});
   const list = data ? data['recognitionList'] : [];
   list.forEach((item, index) => item.key = `${key}_${index}`);
-  return list
+  return list;
 };
 
 const handlerPriorityUpdate = (projectId, subjectCode) => {
@@ -21,7 +21,9 @@ export const Action = (props) => {
     try {
       await handlerPriorityUpdate(projectId, subjectCode);
       message.success('优先级设置成功');
-      reload();
+      if (typeof reload === 'function') {
+        reload();
+      }
     } catch (err) {
       message.error(err);
     }
