@@ -6,7 +6,7 @@ import {
   CarryOutOutlined
 } from '@ant-design/icons';
 import {Layout, message, Tabs, BackTop} from 'antd';
-import MonitorInfo from '../components/monitorInfo';
+import MonitorInfo from '../components/MonitorInfo';
 import TableList from '../components/TableList';
 import {getMonitorInfo} from '../api/cloudRecognition';
 
