@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'antd/dist/antd.css';
-import './index.css';
-import * as serviceWorker from './serviceWorker';
+import './styles/index.scss';
+import * as serviceWorker from './libs/serviceWorker';
 import App from './App';
 
 moment.locale('zh-cn');

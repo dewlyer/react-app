@@ -1,10 +1,6 @@
 import React from 'react';
-import './monitor.scss';
-import {
-  TeamOutlined,
-  SnippetsOutlined,
-  CarryOutOutlined
-} from '@ant-design/icons';
+import '../styles/monitor.scss';
+import {TeamOutlined, SnippetsOutlined, CarryOutOutlined} from '@ant-design/icons';
 import {Layout, message, Tabs, BackTop} from 'antd';
 import MonitorInfo from '../components/MonitorInfo';
 import TableList from '../components/TableList';

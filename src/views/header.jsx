@@ -17,6 +17,8 @@ function Header() {
   )
 }
 
+export default Header;
+
 // class Header extends React.Component {
 //   state = {
 //     headStyle: {
@@ -37,5 +39,3 @@ function Header() {
 //     );
 //   };
 // }
-
-export default Header
